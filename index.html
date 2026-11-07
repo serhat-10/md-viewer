@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>MD Görüntüleyici</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" id="hljs-light" href="vendor/hljs-github.min.css">
+  <link rel="stylesheet" id="hljs-dark" href="vendor/hljs-github-dark.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="toolbar" role="toolbar" aria-label="Araç çubuğu">
+    <button id="btn-toc" class="icon-btn" title="İçindekiler paneli (Alt+T)" aria-pressed="true">☰</button>
+    <span class="brand">MD Görüntüleyici</span>
+    <span class="spacer"></span>
+    <button id="btn-open" title="Dosya aç (Ctrl+O)">Dosya aç</button>
+    <button id="btn-open-path" title="Tam yolu yazarak aç" hidden>Yol ile aç</button>
+    <button id="btn-reload" title="Dosyayı yeniden yükle (Alt+R)" hidden>Yenile</button>
+    <button id="btn-search" title="Belgede ara (Ctrl+F)">Ara</button>
+    <button id="btn-remote" title="Uzak (internet) görsellerini yükle/engelle" aria-pressed="false">Uzak görseller: kapalı</button>
+    <button id="btn-theme" title="Tema: Sistem / Açık / Koyu">Tema: Sistem</button>
+    <button id="btn-print" title="Yazdır (Ctrl+P)">Yazdır</button>
+    <input type="file" id="file-input" accept=".md,.markdown,.mdown,.mkd,.mkdn,.mdx,.txt,text/markdown,text/plain,image/*" multiple hidden>
+  </header>
+
+  <nav id="tabs" class="tabs" role="tablist" aria-label="Açık belgeler"></nav>
+
+  <div id="searchbar" class="searchbar" hidden>
+    <input id="search-input" type="search" placeholder="Belgede ara…" aria-label="Belgede ara" autocomplete="off">
+    <span id="search-count" class="search-count" aria-live="polite"></span>
+    <button id="search-prev" class="icon-btn" title="Önceki (Shift+Enter)">↑</button>
+    <button id="search-next" class="icon-btn" title="Sonraki (Enter)">↓</button>
+    <button id="search-close" class="icon-btn" title="Kapat (Esc)">✕</button>
+  </div>
+
+  <div class="layout">
+    <aside id="toc" class="toc" aria-label="İçindekiler">
+      <div class="toc-title">İçindekiler</div>
+      <ol id="toc-list"></ol>
+    </aside>
+
+    <main id="main" class="main">
+      <section id="welcome" class="welcome">
+        <h1>Markdown dosyası açın</h1>
+        <p>Dosyayı bu pencereye <strong>sürükleyip bırakın</strong> ya da <strong>Dosya aç</strong> düğmesini kullanın.</p>
+        <p class="muted" id="mode-note"></p>
+        <div class="recent-box">
+          <h2>Son açılanlar</h2>
+          <ul id="recent-list" class="recent-list"></ul>
+          <button id="btn-clear-recent" class="link-btn" hidden>Listeyi temizle</button>
+        </div>
+      </section>
+      <article id="content" class="markdown-body" hidden></article>
+    </main>
+  </div>
+
+  <div id="dropzone" class="dropzone" hidden><div>Bırakın, açılsın</div></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script src="vendor/marked.umd.js"></script>
+  <script src="vendor/marked-footnote.umd.js"></script>
+  <!-- mermaid.min.js ve katex.min.js/.css yalnızca belgede gerektiğinde app.js tarafından yüklenir -->
+  <script src="vendor/purify.min.js"></script>
+  <script src="vendor/highlight.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
